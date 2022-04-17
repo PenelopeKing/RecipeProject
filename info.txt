@@ -1,0 +1,5 @@
+Links I found useful for this project:
+
+https://www.dataquest.io/blog/python-api-tutorial/
+https://www.askpython.com/python/examples/pull-data-from-an-api
+https://www.kaggle.com/docs/api
