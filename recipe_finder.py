@@ -3,13 +3,11 @@ Penelope King
 April 2022
 Recipe Finder Project
 """
-
 import pandas as pd
 import numpy as np
 from ast import literal_eval
 
 class RecipeFinder:
-
     df = None
     ing_input = None
 
@@ -55,31 +53,34 @@ class RecipeFinder:
         """
         def ing_match(NER_list):
             """
-            method intended for a panda series
+            (!) needs improvements
 
+            method intended for a panda series
+            finds out if input list has any matches for a row in data frame 
             """
             checking = all(ing.lower() in self.ing_input for ing in NER_list)
             return checking
         
         self.df['has_ingredients'] = self.df['NER'].apply(ing_match)
+        
         # only contains enteries where has_ingredients == True
         match_df = self.df[self.df['has_ingredients']].reset_index(drop=True)
+        
+        # examples for output
         match_1 = (match_df.get('title').iloc[0], \
             match_df.get('ingredients').iloc[0])
         match_2 = (match_df.get('title').iloc[match_df.shape[0]-1], \
             match_df.get('ingredients').iloc[match_df.shape[0]-1])
 
-
         with open('my_recipes.txt','w') as rec:
             rec.write('Recipes:\n')
-
             # (!) this may be slow...
             for i in range(match_df.shape[0]):
                 match = (match_df.get('title').iloc[i],\
                      match_df.get('ingredients').iloc[i],\
                      match_df.get('link').iloc[i])
                 rec.write('{} : {}\n{}\n'.format(match[0], match[1], match[2]))
-
+        
         # making string for output
         output = '\nI found {} recipes for you!'.format(match_df.shape[0]) + \
         '\nHere are some recipes you can make: \n'+ \
@@ -91,18 +92,15 @@ class RecipeFinder:
         return output
 
 
-
-
-
 def start():
     """
-    main method
+    main method, run this method to start the code
     """
     def ask_for_ing():
         """
         asks for input for ingredients
         """
-        input_message ='TYPE AN INGREDIENT YOU OWN HERE:  '
+        input_message ='TYPE AN INGREDIENT YOU OWN HERE:    '
         ing_list = []
         not_done = True
         stuff_to_delete = True
@@ -122,7 +120,7 @@ def start():
         while stuff_to_delete:
             print('\nYOUR INGREDIENTS: ')
             print(ing_list)
-            double_check = input('\nAnything you want to delete? (Y/N)   ')
+            double_check = input('\nAnything you want to delete? (Y/N)  ')
             if (double_check.lower() == 'no') | (double_check.lower() == 'n'):
                 delete = input('What do you want to delete?     ')
                 ing_list.remove(delete.lower())
@@ -133,7 +131,7 @@ def start():
         return(ing_list)
 
     # calling functions here
-    # ask for input
+    # asks for input
     ing_list = ask_for_ing()
     print('\nFinding recipes! This make take a while...\n')
 
