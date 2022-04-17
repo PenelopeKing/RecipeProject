@@ -3,3 +3,5 @@ Links I found useful for this project:
 https://www.dataquest.io/blog/python-api-tutorial/
 https://www.askpython.com/python/examples/pull-data-from-an-api
 https://www.kaggle.com/docs/api
+https://towardsdatascience.com/the-best-format-to-save-pandas-data-414dca023e0d
+
