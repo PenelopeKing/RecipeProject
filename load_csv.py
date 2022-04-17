@@ -13,8 +13,9 @@ print(response.status_code)
 if (response.status_code == 200):
     data = response.json()
 '''
+
 import pandas as pd
-import numpy as np
 
 filepath = 'datasets/RecipeNLG_dataset.csv'
 raw_df = pd.read_csv(filepath)
+raw_df.to_pickle("pickled_data.pkl")
